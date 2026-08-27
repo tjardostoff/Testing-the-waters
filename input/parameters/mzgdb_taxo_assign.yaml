@@ -1,0 +1,8 @@
+inputfasta: 'outputs/taxo_assignment/sequences_to_assign.fasta.gz'
+
+vsearch_refdb_seq: 'archive/refdb/mzgdb/mzgdb.fasta.gz'
+vsearch_refdb_taxo: 'archive/refdb/mzgdb/mzgdb_taxo.tsv'
+vsearch_iddef: 2
+best_hit_only: true
+
+outdir: 'outputs/taxo_assignment/mzgdb'

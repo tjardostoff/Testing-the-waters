@@ -1,0 +1,32 @@
+#### ampliseq
+
+# main arguments
+FW_primer: "GGWACWGGWTGAACWGTWTAYCCYCC"
+RV_primer: "TAAACTTCAGGGTGACCAAAAAATCA"
+
+# sequencing input
+ignore_empty_input_files: true
+
+# primer removal
+ignore_failed_trimming: true
+
+# read trimming and quality filtering
+ignore_failed_filtering: true
+
+# asv calculation
+sample_inference: "pseudo"
+
+# asv post processing
+vsearch_cluster: true
+
+# asv filtering
+
+# taxonomic database
+dada_ref_tax_custom: "archive/refdb/ekoi/ekoi_beta_dada2.fasta.gz"
+
+# downstream analysis
+
+# skipping specific steps
+skip_dada_addspecies: true
+
+# generic options

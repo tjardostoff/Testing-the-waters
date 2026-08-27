@@ -1,0 +1,8 @@
+inputfasta: 'outputs/taxo_assignment/sequences_to_assign.fasta.gz'
+
+vsearch_refdb_seq: 'archive/refdb/bold/bold.fasta.gz'
+vsearch_refdb_taxo: 'archive/refdb/bold/bold_taxo.tsv'
+vsearch_iddef: 2
+best_hit_only: true
+
+outdir: 'outputs/taxo_assignment/bold'

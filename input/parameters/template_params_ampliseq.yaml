@@ -1,0 +1,34 @@
+#### ampliseq
+
+# main arguments
+FW_primer: ""
+RV_primer: ""
+
+# sequencing input
+ignore_empty_input_files: true
+
+# primer removal
+ignore_failed_trimming: true
+
+# read trimming and quality filtering
+ignore_failed_filtering: true
+
+# asv calculation
+sample_inference: "pseudo"
+
+# asv filtering
+
+# downstream analysis
+
+# skipping specific steps
+skip_barrnap: true
+skip_qiime: true
+skip_taxonomy: true
+skip_dada_taxonomy: true
+skip_dada_addspecies: true
+skip_barplot: true
+skip_abundance_tables: true
+skip_alpha_rarefaction: true
+skip_diversity_indices: true
+
+# generic options

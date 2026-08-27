@@ -1,0 +1,13 @@
+# Reference database info
+refdb_input: 'archive/refdb/bold/BOLD_Public.04-Apr-2025_preformated.fasta.gz'
+refdb_alias: 'bold'
+
+# export folder
+outdir: 'archive/refdb/bold'
+
+# steps to skip
+skip_trimming: true
+
+# input format
+format_id_sep: ' '
+format_taxo_sep: ';'

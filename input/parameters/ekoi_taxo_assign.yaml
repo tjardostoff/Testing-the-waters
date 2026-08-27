@@ -1,0 +1,14 @@
+inputfasta: 'outputs/taxo_assignment/sequences_to_assign.fasta.gz'
+
+vsearch_refdb_seq: 'archive/refdb/ekoi/ekoi_beta.fasta.gz'
+vsearch_refdb_taxo: 'archive/refdb/ekoi/ekoi_beta_taxo.tsv'
+vsearch_iddef: 2
+best_hit_only: true
+
+skip_dada2: false
+dada2_refdb: 'archive/refdb/ekoi/ekoi_beta_dada2.fasta.gz'
+
+skip_idtaxa: false
+idtaxa_refdb: 'archive/refdb/ekoi/ekoi_beta_decipher.rds'
+
+outdir: 'outputs/taxo_assignment/ekoi'

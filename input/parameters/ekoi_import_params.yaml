@@ -1,0 +1,18 @@
+# Reference database info
+refdb_input: 'archive/refdb/ekoi/eKOI_formated.fasta.gz'
+refdb_alias: 'ekoi_beta'
+
+# export folder
+outdir: 'archive/refdb/ekoi'
+
+# steps to skip
+skip_trimming: true
+skip_decipher_training: false
+skip_dada2_format: false
+
+# input format
+format_id_sep: ' '
+format_taxo_sep: ';'
+
+#decipher param
+idtaxa_root_regex: "^"
