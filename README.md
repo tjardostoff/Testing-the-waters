@@ -1,55 +1,93 @@
 # Testing the waters
 
+---
+
 ## Presentation
 
-This repository gathers all the code necessary to assemble the ASV table analyzes in the study "Testing the water". It also comprised the code use to perform the statistical analyses.
+This repository contains all the code required to **assemble ASV tables** and perform **statistical analyses** for the study *"Testing the waters"*.
 
-## How to run the code
+---
 
-All the scripts to assemble the ASV table are called by `main.bash`. For statistical analyses, run the script `scripts/analyses/05_script_statistical_analyses.R` independently.
+## How to Run the Code
+
+1. **Assemble ASV tables**: Run the main script to process all projects:
+  ```bash
+   bash main.bash
+  ```
+2. **Run statistical analyses**: Execute the R script independently:
+  ```bash
+   Rscript scripts/analyses/05_script_statistical_analyses.R
+  ```
+
+Configuration files need to be adapted to work in a different environment than the ABiMS SLURM cluster.
+
+---
+
+## Dependencies
+
+- [Nextflow](https://www.nextflow.io/)
+- [nf-core/ampliseq](https://github.com/nf-core/ampliseq/)
+- R packages: `dplyr`, `vegan`, `tidyverse`
+
+---
 
 ## Structure
 
-### input
+---
 
-#### manifest
+### `input/`
 
-* `spatial_ampliseq.tsv`: nf-core/ampliseq input file, indicating for each sample, the corresponding run, the forward file and reverse file.  
+#### Manifest Files
 
-#### Nextflow config files
+- `spatial_ampliseq.tsv`: TSV file (nf-core/ampliseq input) mapping each sample to its corresponding run, forward file, and reverse file.
 
-* `ampliseq.config`: configuration file to run [nf-core/ampliseq](https://github.com/nf-core/ampliseq/) on ABiMS cluster
+#### Nextflow Configuration
 
-#### Taxonomic assignment config files
+- `ampliseq.config`: Configuration file to run [nf-core/ampliseq](https://github.com/nf-core/ampliseq/) on the ABiMS cluster.
 
-* `refdb_import_abims.config`: configuration file to import the reference databases used for taxonomic assignment
-* `bold_assign.config`: configuration file to run the taxonomic assignment against BOLD.
+#### Taxonomic Assignment Configuration
 
-#### Nextflow parameters files
+- `refdb_import_abims.config`: Configuration file to import reference databases for taxonomic assignment.
+- `bold_assign.config`: Configuration file to run taxonomic assignment against BOLD.
 
-* `spatial_params_ampliseq.yaml`: list of parameters used with nf-core/ampliseq.
-* `{refdb}_import_params.yaml`: list of parameters used for the import of {refdb}
-* `{refdb}_taxo_assign.yaml`: list of parameters used for the taxonomic assignment using {refdb}
+#### Parameters
 
-### scripts
+- `spatial_params_ampliseq.yaml`: Parameters for running nf-core/ampliseq.
+- `[refdb]_import_params.yaml`: Parameters for importing the `[refdb]` reference database.
+- `[refdb]_taxo_assign.yaml`: Parameters for taxonomic assignment using `[refdb]`.
 
-#### analyses
+---
 
-* `00_refdb_download_bold.bash`: import BOLD reference database
-* `00_refdb_download_ekoi.bash`: import EKOI reference database
-* `00_refdb_download_mzgdb.bash`: import mzgdb reference database
-* `01_asvs_per_project.bash`: run nf-core/ampliseq for each project (one file in `input/manifest` per project)
-* `02_format_tables_per_project.bash`: script transforming counts in long format for each project
-* `03_taxo_assignment.bash`: run the taxonomic assignment for all the projects together
-* `04_format_table_export.R`: script formatting files for export
-* `05_script_statistical_analyses.R`: run the ecological/statistical analyses
+### `scripts/`
 
-#### awk
+#### `analyses/`
 
-* `asv_table_longer.awk`: awk script called by `03_long_format_counts.bash` to transform ASV counts in long format
+- `00_refdb_download_bold.bash`: Imports the BOLD reference database.
+- `00_refdb_download_ekoi.bash`: Imports the EKOI reference database.
+- `00_refdb_download_mzgdb.bash`: Imports the mzgdb reference database.
+- `01_asvs_per_project.bash`: Runs nf-core/ampliseq for each project (one file per project in `input/manifest`).
+- `02_format_tables_per_project.bash`: Transforms ASV counts into long format and filters out rare ASVs (< 3 reads or < 2 samples).
+- `03_taxo_assignment.bash`: Runs taxonomic assignment for all projects.
+- `04_format_table_export.R`: Formats and exports tables for downstream analyses.
+- `05_script_statistical_analyses.R`: Performs ecological and statistical analyses.
 
-#### bash
+#### `awk/`
 
-* `ampliseq.bash`: script called by `01_asvs_per_project.bash` to run nf-core/ampliseq on a given project raw data to generate an ASV table
-* `subset_and_format_table.bash`: script called by `02_format_tables_per_project.bash` to transform a project ASV table into long format counts (see `asv_table_longer.awk`), filter out rare ASVs (< 3 reads or < 2 samples) and export filtered fasta file
-* `taxo_assign.bash`: script called by `03_taxo_assignment.bash`, run the taxonomic assignment for one reference data base
+- `asv_table_longer.awk`: AWK script to transform ASV counts into long format (called by `02_format_tables_per_project.bash`).
+
+#### `bash/`
+
+- `ampliseq.bash`: Runs nf-core/ampliseq on raw data for a given project (called by `01_asvs_per_project.bash`).
+- `subset_and_format_table.bash`: Filters ASVs and exports filtered FASTA files (called by `02_format_tables_per_project.bash`).
+- `taxo_assign.bash`: Runs taxonomic assignment for one reference database (called by `03_taxo_assignment.bash`).
+
+---
+
+## Outputs
+
+- `results/asv_tables/`: ASV tables per project (filtered and in long format).
+- `results/taxo_assignment/`: Taxonomic assignment results.
+- `output/formatted_tables/`: Formatted tables for export.
+- `output/figures/`: Plots and visualizations from statistical analyses.
+
+---
